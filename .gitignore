@@ -1,0 +1,8 @@
+/.vs
+/Debug
+/Release
+*.VC.db
+*.opendb
+*.zip
+/Manager/Debug
+/Manager/Release

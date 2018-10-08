@@ -1,0 +1,180 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="PE窗口">
+      <UniqueIdentifier>{f9c09cd5-813f-4c27-ad05-6632d892c7f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="任务管理器">
+      <UniqueIdentifier>{a1f8ae3f-9dbd-49fc-970f-cda45980cf52}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="区段表">
+      <UniqueIdentifier>{fb62eca6-d0c8-4206-9ae4-613f1c459c7b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="目录表">
+      <UniqueIdentifier>{4a1c4063-746e-49b5-adb1-c9900ed34559}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="导入表">
+      <UniqueIdentifier>{6039869f-8992-4ea0-84a7-164d7753e5fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="任务管理器\头文件">
+      <UniqueIdentifier>{f7eaa99a-4922-4ec3-9198-b66a243cd809}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="任务管理器\源文件">
+      <UniqueIdentifier>{9f09102f-ada2-46e3-a3f7-49fce496a256}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="导出表">
+      <UniqueIdentifier>{930eef9b-7ea7-4125-bc64-d87a781e19ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源表">
+      <UniqueIdentifier>{85a63528-a402-47e3-a8a8-8131f4989b22}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ManagerDlg.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="DialogPE.h">
+      <Filter>PE窗口</Filter>
+    </ClInclude>
+    <ClInclude Include="SectionDlg.h">
+      <Filter>区段表</Filter>
+    </ClInclude>
+    <ClInclude Include="DirDlg.h">
+      <Filter>目录表</Filter>
+    </ClInclude>
+    <ClInclude Include="ImportDlg.h">
+      <Filter>导入表</Filter>
+    </ClInclude>
+    <ClInclude Include="DialogA.h">
+      <Filter>任务管理器\头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="DialogB.h">
+      <Filter>任务管理器\头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="DialogC.h">
+      <Filter>任务管理器\头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="DialogHeap.h">
+      <Filter>任务管理器\头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="DialogSubThread.h">
+      <Filter>任务管理器\头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="DialogVsClear.h">
+      <Filter>任务管理器\头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Manager.h">
+      <Filter>任务管理器\头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleDialog.h">
+      <Filter>任务管理器\头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="MyListCtrl.h">
+      <Filter>任务管理器\头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="MyTabCtrl.h">
+      <Filter>任务管理器\头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ExportDlg.h">
+      <Filter>导出表</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceDlg.h">
+      <Filter>资源表</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="ManagerDlg.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleDialog.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="DialogPE.cpp">
+      <Filter>PE窗口</Filter>
+    </ClCompile>
+    <ClCompile Include="SectionDlg.cpp">
+      <Filter>区段表</Filter>
+    </ClCompile>
+    <ClCompile Include="DirDlg.cpp">
+      <Filter>目录表</Filter>
+    </ClCompile>
+    <ClCompile Include="ImportDlg.cpp">
+      <Filter>导入表</Filter>
+    </ClCompile>
+    <ClCompile Include="DialogA.cpp">
+      <Filter>任务管理器\源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="DialogB.cpp">
+      <Filter>任务管理器\源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="DialogC.cpp">
+      <Filter>任务管理器\源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="DialogHeap.cpp">
+      <Filter>任务管理器\源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="DialogSubThread.cpp">
+      <Filter>任务管理器\源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="DialogVsClear.cpp">
+      <Filter>任务管理器\源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Manager.cpp">
+      <Filter>任务管理器\源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="MyListCtrl.cpp">
+      <Filter>任务管理器\源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="MyTabCtrl.cpp">
+      <Filter>任务管理器\源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ExportDlg.cpp">
+      <Filter>导出表</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceDlg.cpp">
+      <Filter>资源表</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Manager.rc">
+      <Filter>资源文件</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\Manager.rc2">
+      <Filter>资源文件</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\Manager.ico">
+      <Filter>资源文件</Filter>
+    </Image>
+  </ItemGroup>
+</Project>
