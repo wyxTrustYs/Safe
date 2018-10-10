@@ -22,11 +22,15 @@ public:
 
 // ÷ÿ–¥
 public:
+	void UpLevel();
+	void onNum(UINT Num);
+	
 	virtual BOOL InitInstance();
 
 //  µœ÷
 
 	DECLARE_MESSAGE_MAP()
+//	afx_msg void OnShutDown();
 };
 
 extern CManagerApp theApp;

@@ -31,9 +31,11 @@ public:
 	afx_msg void OnRclickList2(NMHDR *pNMHDR, LRESULT *pResult);
 	afx_msg void On32781();
 	CButton Flush;
-//	afx_msg void OnBnClickedButton2();
+
 	afx_msg void On32782();
 	afx_msg void OnBnClickedFlushprocess();
 	afx_msg void On32786();
 	afx_msg void On32787();
+
+	afx_msg void OnBnClickedbtncleanmem();
 };

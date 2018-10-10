@@ -9,7 +9,8 @@
 #include "DialogHeap.h"
 #include "ModuleDialog.h"
 #include <TlHelp32.h>
-
+#include <psapi.h>
+#pragma comment(lib,"psapi.lib")
 
 // CDialogA 对话框
 
@@ -38,11 +39,13 @@ void CDialogA::DoDataExchange(CDataExchange* pDX)
 BEGIN_MESSAGE_MAP(CDialogA, CDialogEx)
 	ON_NOTIFY(NM_RCLICK, IDC_LIST2, &CDialogA::OnRclickList2)
 	ON_COMMAND(ID_32781, &CDialogA::On32781)
-//	ON_BN_CLICKED(IDC_BUTTON2, &CDialogA::OnBnClickedButton2)
+	//	ON_BN_CLICKED(IDC_BUTTON2, &CDialogA::OnBnClickedButton2)
 	ON_COMMAND(ID_32782, &CDialogA::On32782)
 	ON_BN_CLICKED(FlushProcess, &CDialogA::OnBnClickedFlushprocess)
 	ON_COMMAND(ID_32786, &CDialogA::On32786)
 	ON_COMMAND(ID_32787, &CDialogA::On32787)
+
+	ON_BN_CLICKED(IDC_btnCleanMem, &CDialogA::OnBnClickedbtncleanmem)
 END_MESSAGE_MAP()
 
 
@@ -58,7 +61,7 @@ BOOL CDialogA::OnInitDialog()
 	m_ListCtrlA.InsertColumn(1, L"pID", 0, 70);
 	m_ListCtrlA.InsertColumn(2, L"优先级", 0, 70);
 	m_ListCtrlA.InsertColumn(3, L"线程数", 0, 70);
-	
+
 	m_ListCtrlA.SetExtendedStyle(LVS_EX_GRIDLINES | LVS_EX_FULLROWSELECT);
 
 	PROCESSENTRY32 pe = { sizeof(PROCESSENTRY32) };
@@ -69,12 +72,12 @@ BOOL CDialogA::OnInitDialog()
 	if (Process32First(hSnap, &pe) == TRUE)
 	{
 		int index = 0;
-	
+
 		//3 循环遍历其他进程的信息
 		do
 		{
 			TCHAR temp[20] = { 0 };
-			
+
 			m_ListCtrlA.InsertItem(index, pe.szExeFile);
 			_stprintf_s(temp, 20, L"%d", pe.th32ProcessID);
 			m_ListCtrlA.SetItemText(index, 1, temp);
@@ -86,7 +89,7 @@ BOOL CDialogA::OnInitDialog()
 			++index;
 		} while (Process32Next(hSnap, &pe));
 	}
-//	EnumWindows(&EnumWindowProc, NULL);
+	//	EnumWindows(&EnumWindowProc, NULL);
 
 	return TRUE;  // return TRUE unless you set the focus to a control
 				  // 异常: OCX 属性页应返回 FALSE
@@ -176,7 +179,7 @@ void CDialogA::On32782()
 void CDialogA::On32786()
 {
 	// TODO: 在此添加命令处理程序代码
-	
+
 	int i = m_ListCtrlA.GetSelectionMark();
 	int PID = _tstoi(m_ListCtrlA.GetItemText(i, 1));
 	ModuleDialog* md = new ModuleDialog(PID);
@@ -191,7 +194,31 @@ void CDialogA::On32787()
 	int i = m_ListCtrlA.GetSelectionMark();
 	int PID = _tstoi(m_ListCtrlA.GetItemText(i, 1));
 	CDialogHeap* heap = new CDialogHeap(PID);
-	
+
 	heap->DoModal();
 	delete heap;
+}
+
+
+
+void CDialogA::OnBnClickedbtncleanmem()
+{
+	//获取当前内存状态
+	MEMORYSTATUSEX stcMemStatusEx = { 0 };
+	stcMemStatusEx.dwLength = sizeof(stcMemStatusEx);
+	GlobalMemoryStatusEx(&stcMemStatusEx);
+	DWORDLONG preUsedMem = stcMemStatusEx.ullTotalPhys - stcMemStatusEx.ullAvailPhys;
+
+	//清理内存
+	DWORD dwPIDList[1000] = { 0 };
+	DWORD bufSize = sizeof(dwPIDList);
+	DWORD dwNeedSize = 0;
+	EnumProcesses(dwPIDList, bufSize, &dwNeedSize);
+	for (DWORD i = 0; i < dwNeedSize; i++) {
+		HANDLE hProcess = OpenProcess(PROCESS_SET_QUOTA, false, dwPIDList[i]);
+		SetProcessWorkingSetSize(hProcess, -1, -1);
+	}
+	//获取清理后的内存状态
+	GlobalMemoryStatusEx(&stcMemStatusEx);
+	DWORDLONG afterCleanUsedMem = stcMemStatusEx.ullTotalPhys - stcMemStatusEx.ullAvailPhys;
 }

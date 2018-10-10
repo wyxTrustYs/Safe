@@ -5,6 +5,8 @@
 #include "Manager.h"
 #include "DialogC.h"
 #include "afxdialogex.h"
+#include <psapi.h>
+#pragma comment(lib,"psapi.lib")
 
 CListCtrl  CDialogC::WIndowsList = {};
 static int index = 0;
@@ -33,6 +35,8 @@ void CDialogC::DoDataExchange(CDataExchange* pDX)
 BEGIN_MESSAGE_MAP(CDialogC, CDialogEx)
 	ON_BN_CLICKED(IDCANCEL, &CDialogC::OnBnClickedCancel)
 	ON_BN_CLICKED(IDFlushWnd, &CDialogC::OnBnClickedFlushwnd)
+
+
 END_MESSAGE_MAP()
 
 
@@ -57,7 +61,7 @@ BOOL CDialogC::OnInitDialog()
 
 	// TODO:  在此添加额外的初始化
 	WIndowsList.InsertColumn(0, L"窗口", 0, 600);
-	
+
 	WIndowsList.SetExtendedStyle(LVS_EX_GRIDLINES | LVS_EX_FULLROWSELECT);
 	EnumWindows(&EnumWindowsProc, NULL);
 
@@ -80,3 +84,4 @@ void CDialogC::OnBnClickedFlushwnd()
 	WIndowsList.DeleteAllItems();
 	EnumWindows(&EnumWindowsProc, NULL);
 }
+

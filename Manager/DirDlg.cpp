@@ -8,6 +8,8 @@
 #include "ImportDlg.h"
 #include "ExportDlg.h"
 #include "SourceDlg.h"
+#include "RelocDlg.h"
+#include "TLSDlg.h"
 // CDirDlg 对话框
 
 IMPLEMENT_DYNAMIC(CDirDlg, CDialogEx)
@@ -33,6 +35,8 @@ BEGIN_MESSAGE_MAP(CDirDlg, CDialogEx)
 	ON_BN_CLICKED(IDC_BUTTON1, &CDirDlg::OnBnClickedButton1)
 	ON_BN_CLICKED(IDC_ExportBtn, &CDirDlg::OnBnClickedExportbtn)
 	ON_BN_CLICKED(IDC_BtnReSource, &CDirDlg::OnBnClickedBtnresource)
+	ON_BN_CLICKED(IDC_BUTTON2, &CDirDlg::OnBnClickedButton2)
+	ON_BN_CLICKED(IDC_BtnTLS, &CDirDlg::OnBnClickedBtntls)
 END_MESSAGE_MAP()
 
 
@@ -96,5 +100,23 @@ void CDirDlg::OnBnClickedBtnresource()
 	CSourceDlg* resource = new CSourceDlg(lpbase);
 	resource->Create(IDD_SourceDlg);
 	resource->ShowWindow(SW_SHOW);
+	// TODO: 在此添加控件通知处理程序代码
+}
+
+
+void CDirDlg::OnBnClickedButton2()
+{
+	CRelocDlg* relocDlg = new CRelocDlg(lpbase);
+	relocDlg->Create(IDD_Reloc_Dlg);
+	relocDlg->ShowWindow(SW_SHOW);
+	// TODO: 在此添加控件通知处理程序代码
+}
+
+
+void CDirDlg::OnBnClickedBtntls()
+{
+	CTLSDlg* TLS = new CTLSDlg(lpbase);
+	TLS->Create(IDD_TLSDlg);
+	TLS->ShowWindow(SW_SHOW);
 	// TODO: 在此添加控件通知处理程序代码
 }

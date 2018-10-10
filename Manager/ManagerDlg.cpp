@@ -11,19 +11,15 @@
 #include "DialogC.h"
 #include "DialogPE.h"
 #include "DialogVsClear.h"
-
-
+#include "CleanDlg.h"
+#include "ServiceDlg.h"
+#include "ClearVir.h"
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
+BOOL m_IsWindowHide = TRUE;
 
 
-
-// DWORD WINAPI CPUThreadProc(LPVOID lpThreadParameter) {
-// 	WaitForSingleObject(lpThreadParameter, 3000);
-// 	return 0;
-// }
-// 用于应用程序“关于”菜单项的 CAboutDlg 对话框
 
 class CAboutDlg : public CDialogEx
 {
@@ -42,10 +38,9 @@ protected:
 protected:
 	DECLARE_MESSAGE_MAP()
 public:
-	//	afx_msg void OnPaint();
-	//	afx_msg HCURSOR OnQueryDragIcon();
-	//	afx_msg void OnDropFiles(HDROP hDropInfo);
-//	virtual BOOL OnInitDialog();
+
+protected:
+//	afx_msg LRESULT OnUpdateMyData(WPARAM wParam, LPARAM lParam);
 };
 
 CAboutDlg::CAboutDlg() : CDialogEx(IDD_ABOUTBOX)
@@ -58,9 +53,7 @@ void CAboutDlg::DoDataExchange(CDataExchange* pDX)
 }
 
 BEGIN_MESSAGE_MAP(CAboutDlg, CDialogEx)
-	//	ON_WM_PAINT()
-	//	ON_WM_QUERYDRAGICON()
-	//	ON_WM_DROPFILES()
+//	ON_MESSAGE(WM_MYUPDATEDATA, &CAboutDlg::OnUpdateMyData)
 END_MESSAGE_MAP()
 
 
@@ -145,14 +138,17 @@ BOOL CManagerDlg::OnInitDialog()
 	// TODO: 在此添加额外的初始化代码
 	SetTimer(1, 5000, NULL);
 
-	CDialogEx* m_Dlg[5];
+	CDialogEx* m_Dlg[10];
 	m_Dlg[0] = new CDialogA();
 	m_Dlg[1] = new CDialogB();
 	m_Dlg[2] = new CDialogC();
 	m_Dlg[3] = new CDialogVsClear();
 	m_Dlg[4] = new DialogPE();
-	m_TabCtrl.InsertTab(5, L"进程信息", L"线程信息", L"窗口信息", L"VS清理工具", L"PE文件解析");
-	m_TabCtrl.AddDig(5, IDD_DIALOGA, m_Dlg[0], IDD_DIALOGB, m_Dlg[1], IDD_WINDOWSDIALOG, m_Dlg[2], IDD_VSCLEAR, m_Dlg[3], IDD_PEDIALOG, m_Dlg[4]);
+	m_Dlg[5] = new CCleanDlg();
+	m_Dlg[6] = new CServiceDlg();
+	m_Dlg[7] = new CClearVir();
+	m_TabCtrl.InsertTab(8, L"进程信息", L"线程信息", L"窗口信息", L"VS清理工具", L"PE文件解析",L"垃圾清理",L"服务",L"杀毒");
+	m_TabCtrl.AddDig(8, IDD_DIALOGA, m_Dlg[0], IDD_DIALOGB, m_Dlg[1], IDD_WINDOWSDIALOG, m_Dlg[2], IDD_VSCLEAR, m_Dlg[3], IDD_PEDIALOG, m_Dlg[4],IDD_CleanDlg,m_Dlg[5],IDD_ServiceDlg,m_Dlg[6],IDD_ClearVirDlg,m_Dlg[7]);
 	m_TabCtrl.SetSelAndShow(0);
 
 	//CPU状态
@@ -176,6 +172,8 @@ BOOL CManagerDlg::OnInitDialog()
 	_stprintf_s(CpuTime, 100, L"CPU使用率：%d", GetCpuUsage());
 	m_status.SetPaneText(2, CpuTime);
 	RepositionBars(AFX_IDW_CONTROLBAR_FIRST, AFX_IDW_CONTROLBAR_LAST, 0);
+
+	::RegisterHotKey(m_hWnd, 0x1234, MOD_CONTROL, 'Q');
 
 	return TRUE;  // 除非将焦点设置到控件，否则返回 TRUE
 }
@@ -232,6 +230,7 @@ HCURSOR CManagerDlg::OnQueryDragIcon()
 
 
 
+
 void CManagerDlg::OnTimer(UINT_PTR nIDEvent)
 {
 	// TODO: 在此添加消息处理程序代码和/或调用默认值
@@ -251,3 +250,28 @@ void CManagerDlg::OnTimer(UINT_PTR nIDEvent)
 	CDialogEx::OnTimer(nIDEvent);
 }
 
+
+
+
+BOOL CManagerDlg::PreTranslateMessage(MSG* pMsg)
+{
+
+	if ((pMsg->message == WM_HOTKEY) && (pMsg->wParam == 0x1234)) {
+		if (m_IsWindowHide) {
+			ShowWindow(SW_HIDE);
+			m_IsWindowHide = FALSE;
+		}
+		else
+		{
+			ShowWindow(SW_SHOW);
+			m_IsWindowHide = TRUE;
+		}
+	}
+	return CDialogEx::PreTranslateMessage(pMsg);
+}
+
+
+//afx_msg LRESULT CAboutDlg::OnUpdateMyData(WPARAM wParam, LPARAM lParam)
+//{
+//	return 0;
+//}

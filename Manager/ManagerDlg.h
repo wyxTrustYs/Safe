@@ -38,4 +38,5 @@ public:
 //	CTabCtrl m_TabCtrl;
 	CMyTabCtrl m_TabCtrl;
 	afx_msg void OnTimer(UINT_PTR nIDEvent);
+	virtual BOOL PreTranslateMessage(MSG* pMsg);
 };

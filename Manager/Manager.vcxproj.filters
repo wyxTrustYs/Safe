@@ -40,14 +40,26 @@
     <Filter Include="资源表">
       <UniqueIdentifier>{85a63528-a402-47e3-a8a8-8131f4989b22}</UniqueIdentifier>
     </Filter>
+    <Filter Include="重定位表">
+      <UniqueIdentifier>{7d184fcd-3fc5-472c-b4b1-335c82a0741f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TLS表">
+      <UniqueIdentifier>{43066684-e311-4149-86ad-6e77a9f24171}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="垃圾清理">
+      <UniqueIdentifier>{31e591eb-7dac-4151-bdd9-2240add9c3ad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="服务">
+      <UniqueIdentifier>{74195c6a-3bd4-4ae9-b405-0f0861328575}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="杀毒">
+      <UniqueIdentifier>{39e8809a-5d04-4bfd-bbdf-dba95de0fdf8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ManagerDlg.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="stdafx.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -105,15 +117,30 @@
     <ClInclude Include="SourceDlg.h">
       <Filter>资源表</Filter>
     </ClInclude>
+    <ClInclude Include="RelocDlg.h">
+      <Filter>重定位表</Filter>
+    </ClInclude>
+    <ClInclude Include="TLSDlg.h">
+      <Filter>TLS表</Filter>
+    </ClInclude>
+    <ClInclude Include="CleanDlg.h">
+      <Filter>垃圾清理</Filter>
+    </ClInclude>
+    <ClInclude Include="ManagerDlg.h">
+      <Filter>任务管理器\头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ServiceDlg.h">
+      <Filter>服务</Filter>
+    </ClInclude>
+    <ClInclude Include="ClearVir.h">
+      <Filter>杀毒</Filter>
+    </ClInclude>
+    <ClInclude Include="Md5.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ManagerDlg.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="stdafx.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="ModuleDialog.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="DialogPE.cpp">
@@ -160,6 +187,30 @@
     </ClCompile>
     <ClCompile Include="SourceDlg.cpp">
       <Filter>资源表</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleDialog.cpp">
+      <Filter>任务管理器\源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="RelocDlg.cpp">
+      <Filter>重定位表</Filter>
+    </ClCompile>
+    <ClCompile Include="TLSDlg.cpp">
+      <Filter>TLS表</Filter>
+    </ClCompile>
+    <ClCompile Include="CleanDlg.cpp">
+      <Filter>垃圾清理</Filter>
+    </ClCompile>
+    <ClCompile Include="ManagerDlg.cpp">
+      <Filter>任务管理器\源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ServiceDlg.cpp">
+      <Filter>服务</Filter>
+    </ClCompile>
+    <ClCompile Include="ClearVir.cpp">
+      <Filter>杀毒</Filter>
+    </ClCompile>
+    <ClCompile Include="Md5.cpp">
+      <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

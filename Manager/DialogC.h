@@ -1,5 +1,6 @@
 #pragma once
 #include "afxcmn.h"
+#include "afxwin.h"
 
 
 // DialogC ¶Ô»°¿ò
@@ -30,4 +31,6 @@ public:
 	virtual BOOL OnInitDialog();
 	afx_msg void OnBnClickedCancel();
 	afx_msg void OnBnClickedFlushwnd();
+	CButton btnCleanMem;
+
 };
