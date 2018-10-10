@@ -10,6 +10,7 @@ typedef struct _VIRINFO
 	TCHAR szVirName[50];
 	TCHAR szVirPath[MAX_PATH];
 	TCHAR szVirSize[50];
+	HANDLE hProcess;
 }VIRINFO, *PVIRINFO;
 
 // CClearVir 对话框
@@ -44,16 +45,13 @@ public:
 	//MD5查杀
 	BOOL MD5Scan(LPCTSTR szPath);
 	CString m_szMD5;
-	//白名单查杀
+	//黑名单查杀
 	BOOL WhiteScan(LPCTSTR szPath);
 	//获取病毒大小
 	CString GetShowSize(DOUBLE dwSize);
 	CString BrowseFolder(HWND hWnd, LPCTSTR lpTitle);
+	BOOL Scan_Process();
 	//响应子线程更新状态消息
-// 	LRESULT OnUpdateMyData(WPARAM wParam, LPARAM lParam)
-// 	{
-// 		return UpdateData(wParam);
-// 	}
 
 	//病毒位置
 	CListCtrl CVirList;
@@ -67,7 +65,7 @@ public:
 	//选择病毒库
 	CString strSelVirLib;
 	BOOL IsSingleScan;		//是否为单个文件查杀，否则为全路径
-	BOOL IsMD5;				//是否是MD5查杀，否则为白名单
+	BOOL IsMD5;				//是否是MD5查杀，否则为黑名单
 	BOOL IsLocal;			//是否为本地查杀，否则为云端
 	CString szTemp;
 
@@ -75,13 +73,12 @@ public:
 	CString m_SinglePath;
 	
 	CString m_AllPath;
-
 	//保存病毒信息Vector
 	vector<VIRINFO> m_vecVirInfo;
 	//病毒库加载信息
 	vector<CString> m_LocalMD5;		//本地MD5库
-	vector<CString> m_LocalWhite;	//本地白名单库
-	vector<CString> m_ServerWhite;	//云端白名单库
+	vector<CString> m_LocalWhite;	//本地黑名单库
+	vector<CString> m_ServerWhite;	//云端黑名单库
 	vector<CString> m_ServerMD5;	//云端MD5库
 	afx_msg void OnCbnSelchangeSelpath();
 	afx_msg void OnBnClickedbtnvirscan();
