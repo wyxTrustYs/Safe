@@ -55,6 +55,9 @@
     <Filter Include="杀毒">
       <UniqueIdentifier>{39e8809a-5d04-4bfd-bbdf-dba95de0fdf8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Socket">
+      <UniqueIdentifier>{eaa95988-4049-4f6f-bc63-d181e36a65bd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />

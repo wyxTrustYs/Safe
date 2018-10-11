@@ -125,6 +125,7 @@ void CImportDlg::ShowImportModleTab()
 //APIName", 0
 void CImportDlg::ShowImportFunTab(DWORD number)
 {
+	CImportFunList.DeleteAllItems();
 	auto pINTAddr =
 		(PIMAGE_THUNK_DATA)(RVAtoFOA(number) + lpbase);
 	int index = 0;

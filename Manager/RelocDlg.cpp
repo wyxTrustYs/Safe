@@ -159,6 +159,7 @@ void CRelocDlg::ShowReloc() {
 void CRelocDlg::ShowSectionInList()
 {
 	int index = 1;
+	RelocBlockList.DeleteAllItems();
 	std::vector<PRELOCAREAINFO>::iterator iter;
 
 	for (iter = vecpRelocAreaInfo.begin(); iter != vecpRelocAreaInfo.end(); iter++)
@@ -188,7 +189,7 @@ void CRelocDlg::ShowSectionInList()
 //将块数据显示出来
 void CRelocDlg::ShowBlockInList(int index)
 {
-	
+	RelocBlockList.DeleteAllItems();
 	PRELOCAREAINFO tmpRelocAreaInfo = vecpRelocAreaInfo[index];
 	std::vector<RELOCINFO> vecRelocInfo = tmpRelocAreaInfo->vecRelocInfo;
 	std::vector<RELOCINFO>::iterator iter;

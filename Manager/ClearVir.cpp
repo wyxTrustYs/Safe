@@ -55,7 +55,27 @@ BOOL CClearVir::OnInitDialog()
 	CVirList.InsertColumn(1, L"病毒位置", 0, 300);
 	CVirList.InsertColumn(2, L"病毒大小", 0, 50);
 	CSelPath.SetCurSel(0);
+	
+	WSAData WsaData = { 0 };
 
+	// 初始化模块并进行判断
+	if (WSAStartup(MAKEWORD(2, 2), &WsaData))
+	{
+		MessageBox(L"初始化模块失败", L"错误信息", MB_OK | MB_ICONERROR);
+		ExitProcess(-1);
+	}
+
+	// 判断版本号是否正确
+
+	// 使用 Create 创建一个套接字
+	if (!MySocket.Create())
+	{
+		int index = GetLastError();
+		MessageBox( L"创建套接字失败", L"错误信息", MB_OK | MB_ICONERROR);
+		ExitProcess(-1);
+	}
+	MySocket.Connect(L"127.0.0.1", 8000);
+	
 	return TRUE;
 }
 
@@ -104,34 +124,29 @@ void CClearVir::StartScan()
 			//先获取病毒库中黑名单的个数
 			CString Temp;
 			GetPrivateProfileString(_T("Num"),
-				_T("White"), _T("DefaultName"),
+				_T("Black"), _T("DefaultName"),
 				Temp.GetBuffer(MAX_PATH), MAX_PATH,
 				_T(".\\LocalVirBase\\Vir.ini"));
 			Temp.ReleaseBuffer();
 			int n = _ttoi(Temp);
-			//在根据个数遍历MD5信息，加载到Vector
+			//在根据个数遍历信息，加载到Vector
 			for (int i = 0; i < n; i++)
 			{
 				CString tempCount;
 				tempCount.Format(_T("%d"), i);
-				GetPrivateProfileString(_T("White"),
+				GetPrivateProfileString(_T("Black"),
 					tempCount, _T("DefaultName"),
 					Temp.GetBuffer(MAX_PATH), MAX_PATH,
 					_T(".\\LocalVirBase\\Vir.ini"));
 				Temp.ReleaseBuffer();
-				m_LocalWhite.push_back(Temp);
+				m_LocalBlack.push_back(Temp);
 			}
-			if (m_LocalWhite.size() == 0)
+			if (m_LocalBlack.size() == 0)
 			{
 				Cpath = _T("读 取 白 名 单 错误 ！");
 				UpdateData(FALSE);
 				return;
 			}
-		}
-		else
-		{
-			//云端黑名单查杀
-
 		}
 	}
 	//1.再判断扫描路径
@@ -208,39 +223,25 @@ void CClearVir::StartScan()
 			}
 		}
 	}
-	//如果是云端，再判断是MD5还是黑名单，下载云端病毒库信息
+	//如果是云端,下载云端病毒库信息
 	else
 	{
-		// 		if (IsMD5)
-		// 		{
-		// 			//云端MD5	加载云端MD5病毒库
-		// 			//获取服务器数据  TRUE 代表获取 MD5数据库
-		// 			if (!m_ServerObj.SendMyMessage(TRUE))
-		// 			{
-		// 				m_szStatus = _T("连 接 服 务 器 失 败 ...");
-		// 				UpdateData(FALSE);
-		// 				return;
-		// 			}
-		// 			//正在连接服务器
-		// 			m_szStatus = _T("正 在 连 接 服 务 器 ...");
-		// 			UpdateData(FALSE);
-		// 			m_ServerMD5 = m_ServerObj.RetVector();
-		// 		}
-		// 		else
-		// 		{
-		// 			//云端黑名单	加载云端黑名单病毒库
-		// 			//获取服务器数据  FALSE 代表获取 黑名单数据库
-		// 			if (!m_ServerObj.SendMyMessage(FALSE))
-		// 			{
-		// 				m_szStatus = _T("连 接 服 务 器 失 败 ...");
-		// 				UpdateData(FALSE);
-		// 				return;
-		// 			}
-		// 			//正在连接服务器
-		// 			m_szStatus = _T("正 在 连 接 服 务 器 ...");
-		// 			UpdateData(FALSE);
-		// 			m_ServerWhite = m_ServerObj.RetVector();
-		// 		}
+		char flag[] = "client";
+		char strFinish[] = "finish";
+		Msg s = { 0 };
+		MySocket.Send(flag, sizeof(flag));
+		MySocket.Receive(&s, sizeof(s));
+		int num = s.flat;
+		for (int i = 0; i < num; i++) {
+			MySocket.Receive(&s, sizeof(s));
+			if (s.flat == 0) {
+				m_ServerMD5.push_back(CString(s.str.strMD5));
+			}
+			else
+			{
+				m_ServerBlack.push_back(CString(s.str.strProcName));
+			}
+		}
 	}
 	//3.创建启动扫描线程
 	//根据以上四项，调用主线程中的函数进行查杀，将结果保存在主线程的Vector中
@@ -279,8 +280,7 @@ BOOL CClearVir::MD5Scan(LPCTSTR szPath)
 	}
 	else
 	{
-		//云端MD5查杀		与m_ServerMD5作对比
-		//本地MD5查杀		与m_LocalMD5作对比
+		//云端MD5查杀与m_ServerMD5作对比
 		for (DWORD i = 0; i < m_ServerMD5.size(); i++)
 		{
 			if (m_ServerMD5[i] == m_szMD5)
@@ -365,7 +365,7 @@ BOOL CClearVir::Scan_Process()
 	if (Process32First(hSnap, &pe) == TRUE) {
 		do
 		{
-			if (WhiteScan(pe.szExeFile))
+			if (BlackScan(pe.szExeFile))
 			{
 				//插入List中显示
 				PID = pe.th32ProcessID;
@@ -491,16 +491,16 @@ void CClearVir::Scan_All(LPCTSTR szPath)
 
 
 
-BOOL CClearVir::WhiteScan(LPCTSTR szPath)
+BOOL CClearVir::BlackScan(LPCTSTR szPath)
 {
 
 	//判断是本地查杀还是云端查杀
 	if (IsLocal)
 	{
-		//本地黑名单查杀		与m_LocalWhite作对比
-		for (DWORD i = 0; i < m_LocalWhite.size(); i++)
+		//本地黑名单查杀		与m_LocalBlack作对比
+		for (DWORD i = 0; i < m_LocalBlack.size(); i++)
 		{
-			if (m_LocalWhite[i] == szPath)
+			if (m_LocalBlack[i] == szPath)
 			{
 				//是病毒 返回真
 				return TRUE;
@@ -510,10 +510,10 @@ BOOL CClearVir::WhiteScan(LPCTSTR szPath)
 	}
 	else
 	{
-		//云端MD5查杀		与m_ServerWhite作对比
-		for (DWORD i = 0; i < m_ServerWhite.size(); i++)
+		//云端黑名单查杀与m_ServerBlack作对比
+		for (DWORD i = 0; i < m_ServerBlack.size(); i++)
 		{
-			if (m_ServerWhite[i] == szPath)
+			if (m_ServerBlack[i] == szPath)
 			{
 				//是病毒 返回真
 				return TRUE;
@@ -546,6 +546,7 @@ void CClearVir::OnCbnSelchangeSelpath()
 void CClearVir::OnBnClickedbtnvirscan()
 {
 	UpdateData(TRUE);
+	
 	if (!strSelModel.Compare(L"MD5")) {
 
 		//MD5
@@ -566,6 +567,7 @@ void CClearVir::OnBnClickedbtnvirscan()
 		//云端
 		IsLocal = FALSE;
 	}
+	m_vecVirInfo.clear();
 	StartScan();
 }
 

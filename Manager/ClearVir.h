@@ -1,5 +1,6 @@
 #pragma once
 #include "afxcmn.h"
+#include "afxsock.h"
 #include "afxwin.h"
 #include <vector>
 using namespace std;
@@ -12,6 +13,16 @@ typedef struct _VIRINFO
 	TCHAR szVirSize[50];
 	HANDLE hProcess;
 }VIRINFO, *PVIRINFO;
+
+typedef struct _Msg
+{
+	int flat;
+	union MyUnion
+	{
+		char strMD5[100];
+		char strProcName[50];
+	}str;
+}Msg, *pMsg;
 
 // CClearVir 对话框
 
@@ -46,10 +57,11 @@ public:
 	BOOL MD5Scan(LPCTSTR szPath);
 	CString m_szMD5;
 	//黑名单查杀
-	BOOL WhiteScan(LPCTSTR szPath);
+	BOOL BlackScan(LPCTSTR szPath);
 	//获取病毒大小
 	CString GetShowSize(DOUBLE dwSize);
 	CString BrowseFolder(HWND hWnd, LPCTSTR lpTitle);
+
 	BOOL Scan_Process();
 	//响应子线程更新状态消息
 
@@ -57,7 +69,7 @@ public:
 	CListCtrl CVirList;
 	//选择全路径查杀还是指定名单查杀
 	CComboBox CSelPath;
-
+	
 	//查杀位置
 	CString Cpath;
 	//选择查杀方式
@@ -71,14 +83,15 @@ public:
 
 	//查杀路径保存
 	CString m_SinglePath;
-	
 	CString m_AllPath;
+	//通信类
+	CSocket MySocket;
 	//保存病毒信息Vector
 	vector<VIRINFO> m_vecVirInfo;
 	//病毒库加载信息
 	vector<CString> m_LocalMD5;		//本地MD5库
-	vector<CString> m_LocalWhite;	//本地黑名单库
-	vector<CString> m_ServerWhite;	//云端黑名单库
+	vector<CString> m_LocalBlack;	//本地黑名单库
+	vector<CString> m_ServerBlack;	//云端黑名单库
 	vector<CString> m_ServerMD5;	//云端MD5库
 	afx_msg void OnCbnSelchangeSelpath();
 	afx_msg void OnBnClickedbtnvirscan();
