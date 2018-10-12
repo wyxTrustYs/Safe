@@ -10,6 +10,7 @@
 #include "SourceDlg.h"
 #include "RelocDlg.h"
 #include "TLSDlg.h"
+#include "DelayDlg.h"
 // CDirDlg 对话框
 
 IMPLEMENT_DYNAMIC(CDirDlg, CDialogEx)
@@ -37,6 +38,7 @@ BEGIN_MESSAGE_MAP(CDirDlg, CDialogEx)
 	ON_BN_CLICKED(IDC_BtnReSource, &CDirDlg::OnBnClickedBtnresource)
 	ON_BN_CLICKED(IDC_BUTTON2, &CDirDlg::OnBnClickedButton2)
 	ON_BN_CLICKED(IDC_BtnTLS, &CDirDlg::OnBnClickedBtntls)
+	ON_BN_CLICKED(IDC_BUTTON3, &CDirDlg::OnBnClickedButton3)
 END_MESSAGE_MAP()
 
 
@@ -119,4 +121,13 @@ void CDirDlg::OnBnClickedBtntls()
 	TLS->Create(IDD_TLSDlg);
 	TLS->ShowWindow(SW_SHOW);
 	// TODO: 在此添加控件通知处理程序代码
+}
+
+
+void CDirDlg::OnBnClickedButton3()
+{
+	// TODO: 在此添加控件通知处理程序代码
+	CDelayDlg* Delaydlg = new CDelayDlg(lpbase);
+	Delaydlg->Create(IDD_DelayDlg);
+	Delaydlg->ShowWindow(SW_SHOW);
 }

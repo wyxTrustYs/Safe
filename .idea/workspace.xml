@@ -1,7 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5eb4ef2d-1491-402f-8b80-b85dece47072" name="Default Changelist" comment="" />
+    <list default="true" id="5eb4ef2d-1491-402f-8b80-b85dece47072" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/Manager/CleanDlg.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Manager/CleanDlg.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Manager/DialogA.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Manager/DialogA.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Manager/DialogA.h" beforeDir="false" afterPath="$PROJECT_DIR$/Manager/DialogA.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Manager/DirDlg.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Manager/DirDlg.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Manager/DirDlg.h" beforeDir="false" afterPath="$PROJECT_DIR$/Manager/DirDlg.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Manager/Manager.aps" beforeDir="false" afterPath="$PROJECT_DIR$/Manager/Manager.aps" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Manager/Manager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Manager/Manager.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Manager/Manager.h" beforeDir="false" afterPath="$PROJECT_DIR$/Manager/Manager.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Manager/Manager.rc" beforeDir="false" afterPath="$PROJECT_DIR$/Manager/Manager.rc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Manager/Manager.vcxproj" beforeDir="false" afterPath="$PROJECT_DIR$/Manager/Manager.vcxproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Manager/Manager.vcxproj.filters" beforeDir="false" afterPath="$PROJECT_DIR$/Manager/Manager.vcxproj.filters" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Manager/ManagerDlg.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Manager/ManagerDlg.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Manager/ManagerDlg.h" beforeDir="false" afterPath="$PROJECT_DIR$/Manager/ManagerDlg.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Manager/resource.h" beforeDir="false" afterPath="$PROJECT_DIR$/Manager/resource.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ipch/MANAGER-aa2c785f/MANAGER-4a35f407.ipch" beforeDir="false" afterPath="$PROJECT_DIR$/ipch/MANAGER-aa2c785f/MANAGER-4a35f407.ipch" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,27 +56,26 @@
         </counts>
       </usages-collector>
     </session>
+    <session id="1953554441">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.closed" value="1" />
+          <entry key="project.open.time.25" value="1" />
+          <entry key="project.opened" value="1" />
+        </counts>
+      </usages-collector>
+    </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Server.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="269">
-              <caret line="58" column="26" lean-forward="true" selection-start-line="58" selection-start-column="26" selection-end-line="58" selection-end-column="26" />
+            <state relative-caret-position="128">
+              <caret line="56" column="42" selection-start-line="56" selection-start-column="42" selection-end-line="56" selection-end-column="42" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
-                <marker date="1539223523070" expanded="true" signature="161:166" ph="..." />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://E:/MinServer/Server.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1863">
-              <caret line="119" column="19" lean-forward="true" selection-start-line="119" selection-start-column="19" selection-end-line="119" selection-end-column="19" />
             </state>
           </provider>
         </entry>
@@ -86,6 +101,9 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
@@ -105,7 +123,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -117,6 +134,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -181,15 +199,14 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="54" y="-8" width="1320" height="784" extended-state="7" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.13962558" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.13318452" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32872504" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.34918034" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39938557" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -207,6 +224,13 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/threading.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="741">
+          <caret line="863" selection-start-line="863" selection-end-line="863" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/minsql.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="161">
@@ -217,27 +241,19 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/threading.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="741">
-          <caret line="863" selection-start-line="863" selection-end-line="863" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://E:/MinServer/Server.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1863">
-          <caret line="119" column="19" lean-forward="true" selection-start-line="119" selection-start-column="19" selection-end-line="119" selection-end-column="19" />
+        <state relative-caret-position="482">
+          <caret line="119" column="19" selection-start-line="119" selection-start-column="19" selection-end-line="119" selection-end-column="19" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Server.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="269">
-          <caret line="58" column="26" lean-forward="true" selection-start-line="58" selection-start-column="26" selection-end-line="58" selection-end-column="26" />
+        <state relative-caret-position="128">
+          <caret line="56" column="42" selection-start-line="56" selection-start-column="42" selection-end-line="56" selection-end-column="42" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
-            <marker date="1539223523070" expanded="true" signature="161:166" ph="..." />
           </folding>
         </state>
       </provider>

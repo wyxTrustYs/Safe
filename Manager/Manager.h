@@ -22,9 +22,9 @@ public:
 
 // ÷ÿ–¥
 public:
-	void UpLevel();
-	void onNum(UINT Num);
-	
+// 	void UpLevel();
+// 	void onNum(UINT Num);
+// 	
 	virtual BOOL InitInstance();
 
 //  µœ÷

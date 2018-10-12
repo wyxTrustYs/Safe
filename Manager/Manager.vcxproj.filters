@@ -58,6 +58,18 @@
     <Filter Include="Socket">
       <UniqueIdentifier>{eaa95988-4049-4f6f-bc63-d181e36a65bd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="延迟加载表">
+      <UniqueIdentifier>{3a6358d8-c886-44ee-b287-540797055c79}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="软件管理">
+      <UniqueIdentifier>{30293fd0-bcb6-41aa-a416-f7321fdf33a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="启动项">
+      <UniqueIdentifier>{ad067f45-9e3d-42f4-93f0-22b0a0dc0e04}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="文件窗口">
+      <UniqueIdentifier>{abd18a64-d90a-4264-90af-3aea53e2c5cc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -141,6 +153,21 @@
     <ClInclude Include="Md5.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="DelayDlg.h">
+      <Filter>延迟加载表</Filter>
+    </ClInclude>
+    <ClInclude Include="SoftwareDlg.h">
+      <Filter>软件管理</Filter>
+    </ClInclude>
+    <ClInclude Include="StartingItemDlg.h">
+      <Filter>启动项</Filter>
+    </ClInclude>
+    <ClInclude Include="FileDirDlg.h">
+      <Filter>文件窗口</Filter>
+    </ClInclude>
+    <ClInclude Include="FileAttr.h">
+      <Filter>文件窗口</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -214,6 +241,21 @@
     </ClCompile>
     <ClCompile Include="Md5.cpp">
       <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="DelayDlg.cpp">
+      <Filter>延迟加载表</Filter>
+    </ClCompile>
+    <ClCompile Include="SoftwareDlg.cpp">
+      <Filter>软件管理</Filter>
+    </ClCompile>
+    <ClCompile Include="StartingItemDlg.cpp">
+      <Filter>启动项</Filter>
+    </ClCompile>
+    <ClCompile Include="FileDirDlg.cpp">
+      <Filter>文件窗口</Filter>
+    </ClCompile>
+    <ClCompile Include="FileAttr.cpp">
+      <Filter>文件窗口</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

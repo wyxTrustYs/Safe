@@ -188,6 +188,7 @@
   <ItemGroup>
     <ClInclude Include="CleanDlg.h" />
     <ClInclude Include="ClearVir.h" />
+    <ClInclude Include="DelayDlg.h" />
     <ClInclude Include="DialogA.h" />
     <ClInclude Include="DialogB.h" />
     <ClInclude Include="DialogC.h" />
@@ -197,6 +198,8 @@
     <ClInclude Include="DialogVsClear.h" />
     <ClInclude Include="DirDlg.h" />
     <ClInclude Include="ExportDlg.h" />
+    <ClInclude Include="FileAttr.h" />
+    <ClInclude Include="FileDirDlg.h" />
     <ClInclude Include="ImportDlg.h" />
     <ClInclude Include="Manager.h" />
     <ClInclude Include="ManagerDlg.h" />
@@ -208,7 +211,9 @@
     <ClInclude Include="Resource.h" />
     <ClInclude Include="SectionDlg.h" />
     <ClInclude Include="ServiceDlg.h" />
+    <ClInclude Include="SoftwareDlg.h" />
     <ClInclude Include="SourceDlg.h" />
+    <ClInclude Include="StartingItemDlg.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="TLSDlg.h" />
@@ -216,6 +221,7 @@
   <ItemGroup>
     <ClCompile Include="CleanDlg.cpp" />
     <ClCompile Include="ClearVir.cpp" />
+    <ClCompile Include="DelayDlg.cpp" />
     <ClCompile Include="DialogA.cpp" />
     <ClCompile Include="DialogB.cpp" />
     <ClCompile Include="DialogC.cpp" />
@@ -225,6 +231,8 @@
     <ClCompile Include="DialogVsClear.cpp" />
     <ClCompile Include="DirDlg.cpp" />
     <ClCompile Include="ExportDlg.cpp" />
+    <ClCompile Include="FileAttr.cpp" />
+    <ClCompile Include="FileDirDlg.cpp" />
     <ClCompile Include="ImportDlg.cpp" />
     <ClCompile Include="Manager.cpp" />
     <ClCompile Include="ManagerDlg.cpp" />
@@ -235,7 +243,9 @@
     <ClCompile Include="RelocDlg.cpp" />
     <ClCompile Include="SectionDlg.cpp" />
     <ClCompile Include="ServiceDlg.cpp" />
+    <ClCompile Include="SoftwareDlg.cpp" />
     <ClCompile Include="SourceDlg.cpp" />
+    <ClCompile Include="StartingItemDlg.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

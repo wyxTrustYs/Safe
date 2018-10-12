@@ -57,8 +57,8 @@ BOOL CCleanDlg::OnInitDialog()
 {
 	CDialogEx::OnInitDialog();
 
-	CDiskRubbish.InsertColumn(0, L"文件路径",0,800);
-	CBroserRubbish.InsertColumn(0, L"文件路径",0,800);
+	CDiskRubbish.InsertColumn(0, L"磁盘文件路径",0,800);
+	CBroserRubbish.InsertColumn(0, L"浏览器文件路径",0,800);
 
 	return TRUE;  
 }

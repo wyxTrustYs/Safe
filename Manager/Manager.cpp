@@ -16,7 +16,7 @@
 BEGIN_MESSAGE_MAP(CManagerApp, CWinApp)
 	ON_COMMAND(ID_HELP, &CWinApp::OnHelp)
 
-	ON_CONTROL_RANGE(BN_CLICKED, ID_ShutDown, ID_Lock, onNum)
+//	ON_CONTROL_RANGE(BN_CLICKED, ID_ShutDown, ID_Lock, onNum)
 
 END_MESSAGE_MAP()
 
@@ -109,46 +109,7 @@ BOOL CManagerApp::InitInstance()
 	return FALSE;
 }
 
-void CManagerApp::UpLevel()
-{
-	HANDLE hToken = NULL;
-	HANDLE hProcess = GetCurrentProcess();
-	OpenProcessToken(hProcess, TOKEN_ADJUST_PRIVILEGES | TOKEN_QUERY, &hToken);
-	TOKEN_PRIVILEGES tp = { 0 };
-	LookupPrivilegeValue(0, SE_SHUTDOWN_NAME, &tp.Privileges[0].Luid);
-	tp.PrivilegeCount = 1;
-	tp.Privileges[0].Attributes = SE_PRIVILEGE_ENABLED;
-	AdjustTokenPrivileges(hToken, FALSE, &tp, sizeof(tp), NULL, NULL);
 
-}
-
-void CManagerApp::onNum(UINT nNum) {
-	UpLevel();
-	UINT index = nNum - ID_ShutDown;
-	switch (index)
-	{
-	case 0:
-		ExitWindowsEx(EWX_POWEROFF | EWX_FORCE, SHTDN_REASON_MAJOR_OTHER);
-		break;
-	case 1:
-		ExitWindowsEx(EWX_REBOOT | EWX_FORCE, SHTDN_REASON_MAJOR_OTHER);
-		break;
-	case 2:
-		ExitWindowsEx(EWX_LOGOFF | EWX_FORCE, SHTDN_REASON_MAJOR_OTHER);
-		break;
-	case 3:
-		LockWorkStation();
-		break;
-// 	case 4:
-// 		SetSuspendState(FALSE, FALSE, FALSE);
-// 		break;
-// 	case 5:
-// 		LockWorkStation();
-// 		break;
-	default:
-		break;
-	} 	
-}
 
 
 

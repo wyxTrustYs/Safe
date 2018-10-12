@@ -46,6 +46,8 @@ BEGIN_MESSAGE_MAP(CDialogA, CDialogEx)
 	ON_COMMAND(ID_32787, &CDialogA::On32787)
 
 	ON_BN_CLICKED(IDC_btnCleanMem, &CDialogA::OnBnClickedbtncleanmem)
+	ON_COMMAND(ID_ProtectProc, &CDialogA::OnProtectproc)
+	ON_COMMAND(ID_EndProtect, &CDialogA::OnEndprotect)
 END_MESSAGE_MAP()
 
 
@@ -221,4 +223,62 @@ void CDialogA::OnBnClickedbtncleanmem()
 	//获取清理后的内存状态
 	GlobalMemoryStatusEx(&stcMemStatusEx);
 	DWORDLONG afterCleanUsedMem = stcMemStatusEx.ullTotalPhys - stcMemStatusEx.ullAvailPhys;
+}
+
+
+void CDialogA::OnProtectproc()
+{
+	int i = m_ListCtrlA.GetSelectionMark();
+	DWORD pPid = _tstoi(m_ListCtrlA.GetItemText(i, 1));
+	DWORD Pid = 0, RealWrite = 0;
+	//DWORD pPid = GetCurrentProcessId();
+	CreateSemaphoreA(NULL, pPid, pPid + 1, "MyPid");
+	HWND hwnd = ::FindWindow(NULL, L"任务管理器");
+	GetWindowThreadProcessId(hwnd, &Pid);
+
+	TaskhProcess = OpenProcess(PROCESS_ALL_ACCESS, FALSE, Pid);
+
+	LPVOID ProcessAddr = VirtualAllocEx(TaskhProcess, NULL, MAX_PATH, MEM_RESERVE | MEM_COMMIT, PAGE_READWRITE);
+
+	WriteProcessMemory(TaskhProcess, ProcessAddr, "E:\\InlineHook.dll", strlen("E:\\InlineHook.dll") + 1, &RealWrite);
+
+	HANDLE Thread = CreateRemoteThread(TaskhProcess, NULL, NULL, (LPTHREAD_START_ROUTINE)LoadLibraryA, ProcessAddr, NULL, NULL);
+
+	WaitForSingleObject(Thread, INFINITE);
+	//TestModule = LoadLibraryA("E:\\InlineHook.dll");
+}
+
+
+void CDialogA::OnEndprotect()
+{
+
+
+// 	DWORD Pid = 0, RealWrite = 0;
+// 	LPVOID ProcessAddr = VirtualAllocEx(TaskhProcess, NULL, MAX_PATH, MEM_RESERVE | MEM_COMMIT, PAGE_READWRITE);
+// 
+// 	WriteProcessMemory(TaskhProcess, ProcessAddr, "E:\\InlineHook.dll", strlen("E:\\InlineHook.dll") + 1, &RealWrite);
+	DWORD dwPid = GetProcessId(TaskhProcess);
+	HANDLE hSnap = CreateToolhelp32Snapshot(TH32CS_SNAPMODULE, dwPid);
+
+	MODULEENTRY32 me32;
+	me32.dwSize = sizeof(me32);
+
+	//查找匹配的进程名称
+	BOOL bRet = Module32First(hSnap, &me32);
+	WCHAR dllPath[] = L"E:\\InlineHook.dll";
+	while (bRet)
+	{
+		if (lstrcmp(me32.szExePath, dllPath) == 0)
+		{
+			break;
+		}
+		bRet = Module32Next(hSnap, &me32);
+	}
+
+	CloseHandle(hSnap);
+	TestModule = me32.hModule;
+	HANDLE Thread = CreateRemoteThread(TaskhProcess, NULL, NULL, (LPTHREAD_START_ROUTINE)FreeLibrary, TestModule, NULL, NULL);
+	//FreeLibrary()
+	WaitForSingleObject(Thread, INFINITE);
+	//FreeLibrary(TestModule);
 }

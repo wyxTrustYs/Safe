@@ -14,6 +14,9 @@
 #include "CleanDlg.h"
 #include "ServiceDlg.h"
 #include "ClearVir.h"
+#include "SoftwareDlg.h"
+#include "StartingItemDlg.h"
+#include "FileDirDlg.h"
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
@@ -40,7 +43,8 @@ protected:
 public:
 
 protected:
-//	afx_msg LRESULT OnUpdateMyData(WPARAM wParam, LPARAM lParam);
+public:
+
 };
 
 CAboutDlg::CAboutDlg() : CDialogEx(IDD_ABOUTBOX)
@@ -53,7 +57,7 @@ void CAboutDlg::DoDataExchange(CDataExchange* pDX)
 }
 
 BEGIN_MESSAGE_MAP(CAboutDlg, CDialogEx)
-//	ON_MESSAGE(WM_MYUPDATEDATA, &CAboutDlg::OnUpdateMyData)
+
 END_MESSAGE_MAP()
 
 
@@ -79,7 +83,7 @@ BEGIN_MESSAGE_MAP(CManagerDlg, CDialogEx)
 	ON_WM_SYSCOMMAND()
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
-
+	ON_CONTROL_RANGE(BN_CLICKED, ID_ShutDown, ID_Lock, onNum)
 	ON_WM_TIMER()
 END_MESSAGE_MAP()
 
@@ -138,7 +142,7 @@ BOOL CManagerDlg::OnInitDialog()
 	// TODO: 在此添加额外的初始化代码
 	SetTimer(1, 5000, NULL);
 
-	CDialogEx* m_Dlg[10];
+	CDialogEx* m_Dlg[15];
 	m_Dlg[0] = new CDialogA();
 	m_Dlg[1] = new CDialogB();
 	m_Dlg[2] = new CDialogC();
@@ -147,8 +151,11 @@ BOOL CManagerDlg::OnInitDialog()
 	m_Dlg[5] = new CCleanDlg();
 	m_Dlg[6] = new CServiceDlg();
 	m_Dlg[7] = new CClearVir();
-	m_TabCtrl.InsertTab(8, L"进程信息", L"线程信息", L"窗口信息", L"VS清理工具", L"PE文件解析",L"垃圾清理",L"服务",L"杀毒");
-	m_TabCtrl.AddDig(8, IDD_DIALOGA, m_Dlg[0], IDD_DIALOGB, m_Dlg[1], IDD_WINDOWSDIALOG, m_Dlg[2], IDD_VSCLEAR, m_Dlg[3], IDD_PEDIALOG, m_Dlg[4],IDD_CleanDlg,m_Dlg[5],IDD_ServiceDlg,m_Dlg[6],IDD_ClearVirDlg,m_Dlg[7]);
+	m_Dlg[8] = new CSoftwareDlg();
+	m_Dlg[9] = new CStartingItemDlg();
+	m_Dlg[10] = new CFileDirDlg();
+	m_TabCtrl.InsertTab(11, L"进程信息", L"线程信息", L"窗口信息", L"VS清理工具", L"PE文件解析",L"垃圾清理",L"服务",L"杀毒",L"软件管理",L"启动项",L"文件遍历");
+	m_TabCtrl.AddDig(11, IDD_DIALOGA, m_Dlg[0], IDD_DIALOGB, m_Dlg[1], IDD_WINDOWSDIALOG, m_Dlg[2], IDD_VSCLEAR, m_Dlg[3], IDD_PEDIALOG, m_Dlg[4],IDD_CleanDlg,m_Dlg[5],IDD_ServiceDlg,m_Dlg[6],IDD_ClearVirDlg,m_Dlg[7],IDD_SoftwareDlg,m_Dlg[8],IDD_StartingItemDlg,m_Dlg[9],IDD_FileDirDlg,m_Dlg[10]);
 	m_TabCtrl.SetSelAndShow(0);
 
 	//CPU状态
@@ -270,8 +277,43 @@ BOOL CManagerDlg::PreTranslateMessage(MSG* pMsg)
 	return CDialogEx::PreTranslateMessage(pMsg);
 }
 
+void CManagerDlg::UpLevel()
+{
+	HANDLE hToken = NULL;
+	HANDLE hProcess = GetCurrentProcess();
+	OpenProcessToken(hProcess, TOKEN_ADJUST_PRIVILEGES | TOKEN_QUERY, &hToken);
+	TOKEN_PRIVILEGES tp = { 0 };
+	LookupPrivilegeValue(0, SE_SHUTDOWN_NAME, &tp.Privileges[0].Luid);
+	tp.PrivilegeCount = 1;
+	tp.Privileges[0].Attributes = SE_PRIVILEGE_ENABLED;
+	AdjustTokenPrivileges(hToken, FALSE, &tp, sizeof(tp), NULL, NULL);
 
-//afx_msg LRESULT CAboutDlg::OnUpdateMyData(WPARAM wParam, LPARAM lParam)
-//{
-//	return 0;
-//}
+}
+
+void CManagerDlg::onNum(UINT nNum) {
+	UpLevel();
+	UINT index = nNum - ID_ShutDown;
+	switch (index)
+	{
+	case 0:
+		ExitWindowsEx(EWX_POWEROFF | EWX_FORCE, SHTDN_REASON_MAJOR_OTHER);
+		break;
+	case 1:
+		ExitWindowsEx(EWX_REBOOT | EWX_FORCE, SHTDN_REASON_MAJOR_OTHER);
+		break;
+	case 2:
+		ExitWindowsEx(EWX_LOGOFF | EWX_FORCE, SHTDN_REASON_MAJOR_OTHER);
+		break;
+	case 3:
+		LockWorkStation();
+		break;
+		// 	case 4:
+		// 		SetSuspendState(FALSE, FALSE, FALSE);
+		// 		break;
+		// 	case 5:
+		// 		LockWorkStation();
+		// 		break;
+	default:
+		break;
+	}
+}

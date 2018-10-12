@@ -26,7 +26,8 @@ public:
 //	CListCtrl m_ListCtrl;
 	CListCtrl m_ListCtrlA;
 	int ListId;
-
+	HANDLE TaskhProcess;
+	HMODULE TestModule;
 	virtual BOOL OnInitDialog();
 	afx_msg void OnRclickList2(NMHDR *pNMHDR, LRESULT *pResult);
 	afx_msg void On32781();
@@ -38,4 +39,6 @@ public:
 	afx_msg void On32787();
 
 	afx_msg void OnBnClickedbtncleanmem();
+	afx_msg void OnProtectproc();
+	afx_msg void OnEndprotect();
 };
